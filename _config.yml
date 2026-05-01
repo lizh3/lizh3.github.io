@@ -22,6 +22,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 github_username: lizh3
 minimal_mistakes_skin: default
 search: true
+atom_feed:
+  hide: true
 
 # Build settings
 markdown: kramdown
@@ -57,7 +59,7 @@ plugins:
 
 author:
   name   : "Zhe Li"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/bio-photo-2.png"
   bio    : "My awesome biography constrained to a sentence or two goes here."
   links:
     - label: "GitHub"
