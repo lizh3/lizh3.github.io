@@ -66,12 +66,30 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/lizh3"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:lzlizhe@foxmail.com"
+    - label: "Steam"
+      icon: "fab fa-fw fa-steam"
+      url: "https://steamcommunity.com/profiles/76561198280862809/"
+    - label: "Bilibili"
+      icon: "fab fa-fw fa-bilibili"
+      url: "https://space.bilibili.com/3181009"
 
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/lizh3"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:lzlizhe@foxmail.com"
+    - label: "Steam"
+      icon: "fab fa-fw fa-steam"
+      url: "https://steamcommunity.com/profiles/76561198280862809/"
+    - label: "Bilibili"
+      icon: "fab fa-fw fa-bilibili"
+      url: "https://space.bilibili.com/3181009"
 
 defaults:
   # _posts
