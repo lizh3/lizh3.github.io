@@ -8,9 +8,12 @@ author_profile: true
 
 A curated collection with personal ratings and notes. Click column headers to sort.
 
-<!-- ========== 表格目录 ========== -->
-<nav class="rv-toc" aria-labelledby="rv-toc-heading">
-  <h3 id="rv-toc-heading">目录</h3>
+<!-- ========== 右侧悬浮目录 ========== -->
+<nav class="rv-toc" id="rv-toc-box" aria-labelledby="rv-toc-heading">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5em;">
+    <h3 id="rv-toc-heading" style="margin:0; font-size:1em; color:#494e52;">目录</h3>
+    <button id="rv-toc-close-btn" style="background:none;border:none;cursor:pointer;font-size:1.1em;color:#7a8288;line-height:1;padding:0 2px;" title="收起目录">✕</button>
+  </div>
   <ol>
     {%- for category in site.data.reviews -%}
       {%- assign cat_key = category[0] -%}
@@ -23,45 +26,72 @@ A curated collection with personal ratings and notes. Click column headers to so
   </ol>
 </nav>
 
+<!-- 收起后右下角显示的“目录”小按钮 -->
+<button id="rv-toc-open-btn" class="rv-toc-open" title="展开目录">目录</button>
+
 <style>
-/* ── 目录 ── */
+/* ── 右侧悬浮目录 ── */
 .rv-toc {
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 1em 1.5em;
-  margin-bottom: 2em;
+  position: fixed;
+  top: 6rem;
+  right: 1.5rem;
+  width: 170px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 1em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  z-index: 10;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.rv-toc h3 {
-  margin: 0 0 0.5em;
-  font-size: 1.1em;
-  color: #494e52;
-}
-.rv-toc ol {
-  margin: 0;
-  padding-left: 1.5em;
-  list-style: decimal;
-}
-.rv-toc li {
-  margin-bottom: 0.3em;
-}
-.rv-toc a {
-  color: #494e52;
-  text-decoration: none;
-  font-weight: 500;
-}
-.rv-toc a:hover {
-  text-decoration: underline;
-}
+.rv-toc h3 { font-size: 1em; }
+.rv-toc ol { margin: 0; padding-left: 1.2em; list-style: decimal; }
+.rv-toc li { margin-bottom: 0.4em; font-size: 0.9em; }
+.rv-toc a { color: #494e52; text-decoration: none; font-weight: 500; }
+.rv-toc a:hover { color: #00a4bd; text-decoration: underline; }
 .rv-toc-count {
   display: inline-block;
   background: #e8e8e8;
   color: #7a8288;
   font-size: 0.75em;
-  padding: 0.1em 0.5em;
-  border-radius: 10px;
-  margin-left: 0.5em;
-  vertical-align: middle;
+  padding: 0.05em 0.4em;
+  border-radius: 8px;
+  margin-left: 0.3em;
+}
+
+/* 目录隐藏状态 */
+.rv-toc.rv-toc-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(20px);
+}
+
+/* 右下角“打开目录”的小按钮 */
+.rv-toc-open {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  z-index: 10;
+  background: #494e52;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.85em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.2s;
+  display: none;
+}
+.rv-toc-open:hover { background: #00a4bd; }
+
+/* 窄屏下隐藏目录组件防遮挡 */
+@media (max-width: 1024px) {
+  .rv-toc, .rv-toc-open { display: none !important; }
 }
 
 /* ── 分类标题 ── */
@@ -70,21 +100,12 @@ A curated collection with personal ratings and notes. Click column headers to so
   margin-bottom: 0.8em;
   padding-bottom: 0.4em;
   border-bottom: 2px solid #bdc1c4;
-  scroll-margin-top: 2em;        /* 点击目录锚点时留出顶部空间 */
+  scroll-margin-top: 2em;
 }
 
 /* ── 表格容器 ── */
-.rv-wrap {
-  width: 100%;
-  overflow-x: auto;
-  margin-bottom: 2em;
-}
-.rv-table {
-  width: 100%;
-  min-width: 960px;
-  border-collapse: collapse;
-  font: inherit;
-}
+.rv-wrap { width: 100%; overflow-x: auto; margin-bottom: 2em; }
+.rv-table { width: 100%; min-width: 960px; border-collapse: collapse; font: inherit; }
 
 /* ── 表头 & 排序指示 ── */
 .rv-table th {
@@ -120,12 +141,7 @@ A curated collection with personal ratings and notes. Click column headers to so
 .rv-table tr:hover { background: #f8f8f8; }
 .rv-score-cell { text-align: center; }
 .rv-date-cell  { white-space: nowrap; }
-.rv-subtitle {
-  display: block;
-  font-size: 0.85em;
-  color: #7a8288;
-  margin-top: 0.2em;
-}
+.rv-subtitle   { display: block; font-size: 0.85em; color: #7a8288; margin-top: 0.2em; }
 
 /* ── 评论折叠 ── */
 .rv-comment-cell { position: relative; }
@@ -137,7 +153,6 @@ A curated collection with personal ratings and notes. Click column headers to so
   line-height: 1.5em;
 }
 .rv-comment-wrapper.rv-expanded { max-height: 2000px; }
-
 .rv-comment-wrapper::after {
   content: "";
   position: absolute;
@@ -147,7 +162,6 @@ A curated collection with personal ratings and notes. Click column headers to so
   pointer-events: none;
 }
 .rv-comment-wrapper.rv-expanded::after { display: none; }
-
 .rv-comment-toggle {
   color: #7a8288;
   font-size: 0.85em;
@@ -212,13 +226,13 @@ A curated collection with personal ratings and notes. Click column headers to so
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.3.0/tablesort.min.js"></script>
 <script>
 (function () {
-  /* 1) 日期列 → data-sort（所有表格统一处理） */
+  /* 1) 日期列 → data-sort */
   document.querySelectorAll('.rv-date-cell').forEach(function (td) {
     var text = td.textContent.trim();
     if (!text) return;
-    var parts  = text.split(' ');
-    var dp     = parts[0].split('/');
-    var tp     = parts[1] ? parts[1].split(':') : ['00', '00'];
+    var parts = text.split(' ');
+    var dp = parts[0].split('/');
+    var tp = parts[1] ? parts[1].split(':') : ['00', '00'];
     var iso =
       dp[0] + '-' +
       dp[1].padStart(2, '0') + '-' +
@@ -228,14 +242,14 @@ A curated collection with personal ratings and notes. Click column headers to so
     td.setAttribute('data-sort', iso);
   });
 
-  /* 2) 为每张表初始化 Tablesort */
+  /* 2) 初始化排序 */
   document.querySelectorAll('.rv-table').forEach(function (table) {
     if (typeof Tablesort !== 'undefined') {
       new Tablesort(table);
     }
   });
 
-  /* 3) 展开 / 收起（事件委托挂在 document，自动覆盖所有表格） */
+  /* 3) 展开 / 收起 */
   document.addEventListener('click', function (e) {
     var toggle = e.target.closest('.rv-comment-toggle');
     if (!toggle) return;
@@ -251,10 +265,24 @@ A curated collection with personal ratings and notes. Click column headers to so
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  /* 5) 目录 打开/关闭 交互 */
+  var tocBox = document.getElementById('rv-toc-box');
+  var closeBtn = document.getElementById('rv-toc-close-btn');
+  var openBtn = document.getElementById('rv-toc-open-btn');
+  
+  if (closeBtn && tocBox && openBtn) {
+    closeBtn.addEventListener('click', function() {
+      tocBox.classList.add('rv-toc-hidden');
+      openBtn.style.display = 'block';
+    });
+    openBtn.addEventListener('click', function() {
+      tocBox.classList.remove('rv-toc-hidden');
+      openBtn.style.display = 'none';
+    });
+  }
 })();
 </script>
