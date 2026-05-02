@@ -1,6 +1,6 @@
 ---
-title: "Taste"
-permalink: /taste/
+title: "Reviews"
+permalink: /reviews/
 layout: single
 author_profile: true
 ---

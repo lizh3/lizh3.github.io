@@ -5,7 +5,7 @@ main:
     url: /categories/
   - title: "Tags"
     url: /tags/
-  - title: "Taste"
-    url: /taste/
+  - title: "Reviews"
+    url: /reviews/
   - title: "About"
     url: /about/
