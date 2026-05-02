@@ -6,22 +6,87 @@ classes: wide
 author_profile: true
 ---
 
-Still testing...
+A curated collection with personal ratings and notes. Click column headers to sort.
+
+<!-- ========== 表格目录 ========== -->
+<nav class="rv-toc" aria-labelledby="rv-toc-heading">
+  <h3 id="rv-toc-heading">目录</h3>
+  <ol>
+    {%- for category in site.data.reviews -%}
+      {%- assign cat_key = category[0] -%}
+      {%- assign cat_items = category[1] -%}
+    <li>
+      <a href="#{{ cat_key | slugify }}">{{ cat_key }}</a>
+      <span class="rv-toc-count">{{ cat_items.size }}</span>
+    </li>
+    {%- endfor -%}
+  </ol>
+</nav>
 
 <style>
-/* 让表格撑满宽页容器（配合 classes: wide） */
+/* ── 目录 ── */
+.rv-toc {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 1em 1.5em;
+  margin-bottom: 2em;
+}
+.rv-toc h3 {
+  margin: 0 0 0.5em;
+  font-size: 1.1em;
+  color: #494e52;
+}
+.rv-toc ol {
+  margin: 0;
+  padding-left: 1.5em;
+  list-style: decimal;
+}
+.rv-toc li {
+  margin-bottom: 0.3em;
+}
+.rv-toc a {
+  color: #494e52;
+  text-decoration: none;
+  font-weight: 500;
+}
+.rv-toc a:hover {
+  text-decoration: underline;
+}
+.rv-toc-count {
+  display: inline-block;
+  background: #e8e8e8;
+  color: #7a8288;
+  font-size: 0.75em;
+  padding: 0.1em 0.5em;
+  border-radius: 10px;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+/* ── 分类标题 ── */
+.rv-section-heading {
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid #bdc1c4;
+  scroll-margin-top: 2em;        /* 点击目录锚点时留出顶部空间 */
+}
+
+/* ── 表格容器 ── */
 .rv-wrap {
   width: 100%;
   overflow-x: auto;
+  margin-bottom: 2em;
 }
 .rv-table {
   width: 100%;
-  min-width: 960px;          /* 防止窄屏下字段挤在一起；可根据实际情况微调 */
+  min-width: 960px;
   border-collapse: collapse;
   font: inherit;
 }
 
-/* 表头与排序指示 */
+/* ── 表头 & 排序指示 ── */
 .rv-table th {
   cursor: pointer;
   user-select: none;
@@ -42,10 +107,10 @@ Still testing...
   color: #7a8288;
   font-size: 0.8em;
 }
-.rv-table th.sort-up::after { content: "\2191"; opacity: 1; }
+.rv-table th.sort-up::after   { content: "\2191"; opacity: 1; }
 .rv-table th.sort-down::after { content: "\2193"; opacity: 1; }
 
-/* 单元格通用 */
+/* ── 单元格 ── */
 .rv-table td {
   padding: 0.5em 0.75em;
   vertical-align: top;
@@ -53,10 +118,8 @@ Still testing...
   overflow-wrap: break-word;
 }
 .rv-table tr:hover { background: #f8f8f8; }
-
-/* 列样式 */
 .rv-score-cell { text-align: center; }
-.rv-date-cell { white-space: nowrap; }
+.rv-date-cell  { white-space: nowrap; }
 .rv-subtitle {
   display: block;
   font-size: 0.85em;
@@ -64,31 +127,27 @@ Still testing...
   margin-top: 0.2em;
 }
 
-/* 评论折叠（展开/收起） */
+/* ── 评论折叠 ── */
 .rv-comment-cell { position: relative; }
 .rv-comment-wrapper {
-  max-height: 4.5em;         /* 默认只显示大约 3 行 */
+  max-height: 4.5em;
   overflow: hidden;
   transition: max-height 0.25s ease;
   position: relative;
   line-height: 1.5em;
 }
-.rv-comment-wrapper.rv-expanded { max-height: 2000px; }   /* 足够大，视内容长度可微调 */
+.rv-comment-wrapper.rv-expanded { max-height: 2000px; }
 
-/* 底部渐隐遮罩 */
 .rv-comment-wrapper::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 2.5em;
   background: linear-gradient(transparent, #fff);
   pointer-events: none;
 }
 .rv-comment-wrapper.rv-expanded::after { display: none; }
 
-/* “展开/收起”按钮 */
 .rv-comment-toggle {
   color: #7a8288;
   font-size: 0.85em;
@@ -102,20 +161,26 @@ Still testing...
 .rv-comment-toggle:hover { color: #494e52; }
 </style>
 
+<!-- ========== 按分类循环生成表格 ========== -->
+{%- for category in site.data.reviews -%}
+  {%- assign cat_key = category[0] -%}
+  {%- assign cat_items = category[1] -%}
+
+<h2 id="{{ cat_key | slugify }}" class="rv-section-heading">{{ cat_key }}</h2>
+
 <div class="rv-wrap">
-  <table id="rv-reviews-table" class="rv-table">
+  <table class="rv-table">
     <thead>
       <tr>
-        <th data-sort-method="string" class="no-sort">Title</th>
+        <th>Title</th>
         <th data-sort-method="number">My Rating</th>
         <th data-sort-method="number">Douban</th>
         <th>Date</th>
-        <th data-sort-method="string">Comment</th>
+        <th>Comment</th>
       </tr>
     </thead>
     <tbody>
-      {%- assign reviews = site.data.reviews -%}
-      {%- for row in reviews -%}
+      {%- for row in cat_items -%}
         {%- if row.title and row.title != "" -%}
       <tr>
         <td>
@@ -141,47 +206,55 @@ Still testing...
     </tbody>
   </table>
 </div>
+{%- endfor -%}
 
+<!-- ========== 脚本 ========== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.3.0/tablesort.min.js"></script>
 <script>
 (function () {
-  // 为日期列增加 data-sort 属性，确保排序稳定（把 2022/7/17 22:22 转为 2022-07-17T22:22）
-  var dateCells = document.querySelectorAll('.rv-date-cell');
-  dateCells.forEach(function (td) {
+  /* 1) 日期列 → data-sort（所有表格统一处理） */
+  document.querySelectorAll('.rv-date-cell').forEach(function (td) {
     var text = td.textContent.trim();
-    var parts = text.split(' ');
-    var dateParts = parts[0].split('/');
-    var timeParts = parts[1] ? parts[1].split(':') : ['00', '00'];
-
+    if (!text) return;
+    var parts  = text.split(' ');
+    var dp     = parts[0].split('/');
+    var tp     = parts[1] ? parts[1].split(':') : ['00', '00'];
     var iso =
-      dateParts[0] + '-' +
-      dateParts[1].padStart(2, '0') + '-' +
-      dateParts[2].padStart(2, '0') + 'T' +
-      (timeParts[0] || '00').padStart(2, '0') + ':' +
-      (timeParts[1] || '00').padStart(2, '0');
-
+      dp[0] + '-' +
+      dp[1].padStart(2, '0') + '-' +
+      dp[2].padStart(2, '0') + 'T' +
+      (tp[0] || '00').padStart(2, '0') + ':' +
+      (tp[1] || '00').padStart(2, '0');
     td.setAttribute('data-sort', iso);
   });
 
-  // 初始化排序
-  var table = document.getElementById('rv-reviews-table');
-  if (table && typeof Tablesort !== 'undefined') {
-    new Tablesort(table);
-  }
+  /* 2) 为每张表初始化 Tablesort */
+  document.querySelectorAll('.rv-table').forEach(function (table) {
+    if (typeof Tablesort !== 'undefined') {
+      new Tablesort(table);
+    }
+  });
 
-  // 展开/收起（事件委托）
-  var tbody = table ? table.querySelector('tbody') : null;
-  if (tbody) {
-    tbody.addEventListener('click', function (e) {
-      var toggle = e.target.closest('.rv-comment-toggle');
-      if (!toggle) return;
-      var wrapper = toggle.previousElementSibling;
-      if (!wrapper) return;
+  /* 3) 展开 / 收起（事件委托挂在 document，自动覆盖所有表格） */
+  document.addEventListener('click', function (e) {
+    var toggle = e.target.closest('.rv-comment-toggle');
+    if (!toggle) return;
+    var wrapper = toggle.previousElementSibling;
+    if (!wrapper) return;
+    var expanding = !wrapper.classList.contains('rv-expanded');
+    wrapper.classList.toggle('rv-expanded', expanding);
+    toggle.textContent = expanding ? '收起' : '展开';
+  });
 
-      var expanding = !wrapper.classList.contains('rv-expanded');
-      wrapper.classList.toggle('rv-expanded', expanding);
-      toggle.textContent = expanding ? '收起' : '展开';
+  /* 4) 目录锚点平滑滚动 */
+  document.querySelectorAll('.rv-toc a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
-  }
+  });
 })();
 </script>

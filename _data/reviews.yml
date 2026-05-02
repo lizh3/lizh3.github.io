@@ -1,0 +1,30 @@
+# ✅ 新结构（顶层 key = 分类名，value = 该分类下的条目数组）
+Books:
+  - title: "书A"
+    card_subtitle: "作者名"
+    my_rating: 8
+    douban_rating: 8.0
+    create_time: "2022/7/17 22:22"
+    comment: "很长的一段评论……"
+  - title: "书B"
+    card_subtitle: "另一作者"
+    my_rating: 9
+    douban_rating: 9.1
+    create_time: "2023/3/5 14:30"
+    comment: "另一段评论……"
+
+Movies:
+  - title: "电影X"
+    card_subtitle: "导演名"
+    my_rating: 7
+    douban_rating: 7.5
+    create_time: "2023/6/1 20:00"
+    comment: "影评内容……"
+
+Papers:
+  - title: "论文标题"
+    card_subtitle: "期刊名"
+    my_rating: 8
+    douban_rating: ""
+    create_time: "2024/1/10 09:00"
+    comment: "论文笔记……"
