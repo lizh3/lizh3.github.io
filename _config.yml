@@ -61,7 +61,7 @@ plugins:
 author:
   name   : "Zhe Li"
   avatar : "/assets/images/bio-photo-2.png"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "Built with AI coding, but written with human feeling."
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
