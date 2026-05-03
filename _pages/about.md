@@ -1,6 +1,9 @@
 ---
 permalink: /about/
-title: "About"
+title: "关于我"
 ---
 
-Coming soon.
+Coming soon...
+
+
+   
