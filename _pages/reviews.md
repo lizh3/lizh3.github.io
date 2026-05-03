@@ -6,7 +6,19 @@ classes: wide
 author_profile: true
 ---
 
-A curated collection with personal ratings and notes. Click column headers to sort.
+信息是从自己的豆瓣抓取、整理的（参考 [douban-scraper](https://github.com/lizh3/douban-scraper)）。而豆瓣账号在本科毕业后出现过意外注销，丢失了毕业以前的数据，所以大部分记录都集中在2020-2025年。
+
+如果未来有多刷再考虑补充以前的作品评价。
+
+书籍·I：悬疑推理小说。
+
+书籍·II：当代文学。
+
+书籍·III：知识科普。
+
+书籍·IV：其他。
+
+（……暂时没想到很好的分类方式，或许不分类是最好的，总之先这样。）
 
 <!-- ========== 右侧悬浮目录 ========== -->
 <nav class="rv-toc" id="rv-toc-box" aria-labelledby="rv-toc-heading">
@@ -127,6 +139,7 @@ p .rv-wrap { width: 100%; }
   min-width: 700px;
   border-collapse: collapse;
   font: inherit;
+  table-layout: fixed;
 }
 
 /* ── 表头 & 排序箭头 ── */
@@ -162,6 +175,42 @@ p .rv-wrap { width: 100%; }
 }
 .rv-table tr:hover { background: #f8f8f8; }
 .rv-subtitle { display: block; font-size: 0.85em; color: #7a8288; margin-top: 0.2em; }
+
+/* 列1：书名 - 20% */
+.rv-table th:nth-child(1),
+.rv-table td:nth-child(1) {
+  width: 25%;
+}
+
+/* 列2：作者 - 20% */
+.rv-table th:nth-child(2),
+.rv-table td:nth-child(2) {
+  width: 20%;
+}
+
+/* 列3：发布时间 - 15% */
+.rv-table th:nth-child(3),
+.rv-table td:nth-child(3) {
+  width: 10%;
+}
+
+/* 列4：阅读日期 - 15% */
+.rv-table th:nth-child(4),
+.rv-table td:nth-child(4) {
+  width: 10%;
+}
+
+/* 列5：评分 - 10% */
+.rv-table th:nth-child(5),
+.rv-table td:nth-child(5) {
+  width: 5%;
+}
+
+/* 列6：评价 - 20% */
+.rv-table th:nth-child(6),
+.rv-table td:nth-child(6) {
+  width: 30%;
+}
 
 /* ── 评论折叠 ── */
 .rv-comment-cell { position: relative; }
@@ -232,7 +281,7 @@ p .rv-wrap { width: 100%; }
 </td>
 {%- if headers.size > 1 -%}<td>{{ row.author }}</td>{%- endif -%}
 {%- if headers.size > 2 -%}<td class="rv-date-cell">{{ row.create_time }}</td>{%- endif -%}
-{%- if headers.size > 3 -%}<td class="rv-date-cell">{{ row.finish_tiem }}</td>{%- endif -%}
+{%- if headers.size > 3 -%}<td class="rv-date-cell">{{ row.finish_time }}</td>{%- endif -%}
 {%- if headers.size > 4 -%}<td>{{ row.my_rating }}</td>{%- endif -%}
 {%- if headers.size > 5 -%}
 <td class="rv-comment-cell">
