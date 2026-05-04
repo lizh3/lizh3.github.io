@@ -4,7 +4,7 @@ Built with AI coding, but written with human feeling.
 
 This is a quiet corner of the internet to process the human experience.
 
-[Click to visit](https://lizh3.github.io/).
+[Click to visit](https://zh3li.github.io/).
 
 <br>
 
