@@ -15,12 +15,12 @@
 # in the templates via {{ site.myvariable }}.
 title: Zhe Li's Blog
 email:
-repository: "lizh3/lizh3.github.io"
+repository: "zh3li/zh3li.github.io"
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-github_username: lizh3
+github_username: zh3li
 words_per_minute: 200
 locale: "zh-CN"
 minimal_mistakes_skin: default
@@ -70,7 +70,7 @@ author:
       url: "mailto:lzlizhe@foxmail.com"  
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/lizh3"
+      url: "https://github.com/zh3li"
     - label: "Steam"
       icon: "fab fa-fw fa-steam"
       url: "https://steamcommunity.com/profiles/76561198280862809/"
@@ -82,7 +82,7 @@ author:
 #   links:
 #     - label: "GitHub"
 #       icon: "fab fa-fw fa-github"
-#       url: "https://github.com/lizh3"
+#       url: "https://github.com/zh3li"
 #     - label: "Email"
 #       icon: "fas fa-fw fa-envelope"
 #       url: "mailto:lzlizhe@foxmail.com"
