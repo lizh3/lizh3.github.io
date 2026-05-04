@@ -6,19 +6,17 @@ classes: wide
 author_profile: true
 ---
 
-信息是从自己的豆瓣抓取、整理的（参考 [douban-scraper](https://github.com/lizh3/douban-scraper)）。而豆瓣账号在本科毕业后出现过意外注销，丢失了毕业以前的数据，所以大部分记录都集中在2020-2025年。
+信息是从自己的豆瓣抓取、整理的（参考 [douban-scraper](https://github.com/lizh3/douban-scraper)）。
+
+豆瓣账号在本科毕业后出现过意外注销，丢失了毕业以前的数据，所以大部分记录都集中在2020-2025年。
 
 如果未来有多刷再考虑补充以前的作品评价。
 
 书籍·I：悬疑推理小说。
 
-书籍·II：当代文学。
+书籍·II：其他。
 
-书籍·III：知识科普。
-
-书籍·IV：其他。
-
-（……暂时没想到很好的分类方式，或许不分类是最好的，总之先这样。）
+（有记录的阅读中，悬疑推理小说较多，故单独分类。）
 
 <!-- ========== 右侧悬浮目录 ========== -->
 <nav class="rv-toc" id="rv-toc-box" aria-labelledby="rv-toc-heading">
@@ -179,7 +177,7 @@ p .rv-wrap { width: 100%; }
 /* 列1：书名 - 20% */
 .rv-table th:nth-child(1),
 .rv-table td:nth-child(1) {
-  width: 25%;
+  width: 20%;
 }
 
 /* 列2：作者 - 20% */
@@ -209,7 +207,7 @@ p .rv-wrap { width: 100%; }
 /* 列6：评价 - 20% */
 .rv-table th:nth-child(6),
 .rv-table td:nth-child(6) {
-  width: 30%;
+  width: 35%;
 }
 
 /* ── 评论折叠 ── */
