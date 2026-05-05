@@ -2,7 +2,7 @@
 title: Github新手(指自己)入门指南
 date: 2019-10-06T00:00:00+08:00
 categories:
-  - 笔记
+  - 学习笔记
 tags:
   - Git
 ---
@@ -327,4 +327,4 @@ fix#24 fixes#24 fixed#24 /fix可以换成close和resolve
 
 ---
 
-**© 版权声明**：本文为 [Zhe Li](https://lizh3.github.io/) 原创，依据 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证进行授权，转载请附上出处链接及本声明。
+**© 版权声明**：本文为 [Zhe Li](https://zh3li.github.io/) 原创，依据 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证进行授权，转载请附上出处链接及本声明。
