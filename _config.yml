@@ -14,9 +14,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Zhe Li's Blog
-email: lzlizhe@foxmail.com
+email: 
 repository: "zh3li/zh3li.github.io"
-home: "https://zh3li.github.io"
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -65,6 +64,7 @@ author:
   name   : "Zhe Li"
   avatar : "/assets/images/bio-photo-2.png"
   bio    : "欲买桂花同载酒，终不似，少年游。"
+  home: "https://zh3li.github.io"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
